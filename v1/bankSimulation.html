@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Simulation</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+        .content {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+        }
+        .column {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .left-column { 
+            width: 300px;
+            flex-shrink: 0;
+        }
+        .middle-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .right-column { 
+            width: 300px;
+            flex-shrink: 0;
+        }
+        .treasury-column {
+            width: 300px;
+            flex-shrink: 0;
+        }
+        .log { 
+            margin-top: 20px; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            height: 200px; 
+            overflow-y: auto;
+        }
+        .buttons { 
+            margin-top: 10px;
+        }
+        button { 
+            margin: 5px 0; 
+            padding: 5px 10px; 
+            display: block;
+            width: 100%;
+        }
+        h3 { margin-top: 0; }
+        footer {
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="column left-column">
+            <h3>Customers</h3>
+            <div>
+                <strong>Customer 1</strong><br>
+                Assets (Deposits): $<span id="cust1Dep">5000</span><br>
+                Assets (Cash): $<span id="cust1Cash">0</span><br>
+                Liabilities (Loans): $<span id="cust1Liab">0</span><br>
+                Assets (Property): <span id="cust1Props">0</span><br>
+                Assets (T-Bills): <span id="cust1TBills">0</span><br>
+                <div class="buttons">
+                    <button onclick="depositPaycheck(1)">Deposit Paycheck</button>
+                    <button onclick="withdrawCash(1)">Withdraw Cash</button>
+                    <button onclick="depositCash(1)">Deposit Cash</button>
+                    <button onclick="requestPropertyLoan(1)">Request Property Loan</button>
+                    <button onclick="buyTBill(1)">Buy T-Bill</button>
+                    <button onclick="sellTBill(1)">Sell T-Bill</button>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <strong>Customer 2</strong><br>
+                Assets (Deposits): $<span id="cust2Dep">3000</span><br>
+                Assets (Cash): $<span id="cust2Cash">0</span><br>
+                Liabilities (Loans): $<span id="cust2Liab">0</span><br>
+                Assets (Property): <span id="cust2Props">0</span><br>
+                Assets (T-Bills): <span id="cust2TBills">0</span><br>
+                <div class="buttons">
+                    <button onclick="depositPaycheck(2)">Deposit Paycheck</button>
+                    <button onclick="withdrawCash(2)">Withdraw Cash</button>
+                    <button onclick="depositCash(2)">Deposit Cash</button>
+                    <button onclick="requestPropertyLoan(2)">Request Property Loan</button>
+                    <button onclick="buyTBill(2)">Buy T-Bill</button>
+                    <button onclick="sellTBill(2)">Sell T-Bill</button>
+                </div>
+            </div>
+        </div>
+        <div class="column middle-column">
+            <h3>Bank Branch</h3>
+            Liabilities (Deposits): $<span id="bankVault">100000</span><br>
+            Assets (Loans): $<span id="bankAssets">0</span><br>
+            Assets (Reserves): $<span id="bankReserves">50000</span><br>
+            Assets (T-Bills): <span id="bankTBills">0</span><br>
+            <div class="buttons">
+                <button onclick="requestReserves()">Request Reserves</button>
+                <button onclick="buyTBill(0)">Buy T-Bill</button>
+                <button onclick="sellTBill(0)">Sell T-Bill</button>
+            </div>
+            <div class="log" id="transactionLog"></div>
+        </div>
+        <div class="column right-column">
+            <h3>Federal Reserve Bank</h3>
+            Liabilities (Reserves): $<span id="fedReserves">100000</span><br>
+            Assets (T-Bills): <span id="fedTBills">0</span><br>
+            <div class="buttons">
+                <button onclick="buyTBillFromTreasury()">Buy T-Bills from Treasury</button>
+                <button onclick="sellTBill(-1)">Sell T-Bill</button>
+            </div>
+        </div>
+        <div class="column treasury-column">
+            <h3>US Treasury</h3>
+            Liabilities (T-Bills): $<span id="treasuryLiab">0</span><br>
+            Cash: $<span id="treasuryCash">0</span><br>
+            <div class="buttons">
+                <button onclick="createTBill()">Create T-Bill</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <br>
+        <p>Inspired by Lyn Aldens book <a href="https://www.amazon.com/stores/author/B0CGM4XMPV/allbooks" target="_blank">Broken Money</a>, Chapter 15. Created by BTCTrek on X using Grok</p>
+    </footer>
+
+    <script>
+        const TBILL_VALUE = 10000; // Fixed value of each T-Bill
+
+        let federalReserve = {
+            reserves: 100000,  // Liabilities (Reserves): total reserves issued
+            tBills: 0         // T-Bills owned
+        };
+        let bank = {
+            vault: 100000,    // Liabilities: Customer deposits
+            assets: 0,        // Assets: Loans to customers
+            reserves: 50000,  // Assets: Reserves received from Federal Reserve
+            tBills: 0        // T-Bills owned
+        };
+        let customers = [
+            { id: 1, deposits: 5000, cash: 0, liabilities: 0, properties: 0, tBills: 0 },
+            { id: 2, deposits: 3000, cash: 0, liabilities: 0, properties: 0, tBills: 0 }
+        ];
+        let treasury = {
+            liabilities: 0,   // Total value of T-Bills issued
+            cash: 0          // Cash received from T-Bill sales
+        };
+        
+        function updateDisplay() {
+            document.getElementById('fedReserves').textContent = federalReserve.reserves;
+            document.getElementById('fedTBills').textContent = federalReserve.tBills;
+            document.getElementById('bankVault').textContent = bank.vault;
+            document.getElementById('bankAssets').textContent = bank.assets;
+            document.getElementById('bankReserves').textContent = bank.reserves;
+            document.getElementById('bankTBills').textContent = bank.tBills;
+            document.getElementById('cust1Dep').textContent = customers[0].deposits;
+            document.getElementById('cust1Cash').textContent = customers[0].cash;
+            document.getElementById('cust1Liab').textContent = customers[0].liabilities;
+            document.getElementById('cust1Props').textContent = customers[0].properties;
+            document.getElementById('cust1TBills').textContent = customers[0].tBills;
+            document.getElementById('cust2Dep').textContent = customers[1].deposits;
+            document.getElementById('cust2Cash').textContent = customers[1].cash;
+            document.getElementById('cust2Liab').textContent = customers[1].liabilities;
+            document.getElementById('cust2Props').textContent = customers[1].properties;
+            document.getElementById('cust2TBills').textContent = customers[1].tBills;
+            document.getElementById('treasuryLiab').textContent = treasury.liabilities;
+            document.getElementById('treasuryCash').textContent = treasury.cash;
+        }
+
+        function logTransaction(message) {
+            const log = document.getElementById('transactionLog');
+            log.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function depositPaycheck(customerId) {
+            const customer = customers[customerId - 1];
+            const paycheck = Math.floor(Math.random() * 2000) + 1000;
+            customer.deposits += paycheck;
+            bank.vault += paycheck;
+            logTransaction(`Customer ${customerId} deposited paycheck of $${paycheck}`);
+            updateDisplay();
+        }
+
+        function withdrawCash(customerId) {
+            const customer = customers[customerId - 1];
+            const amount = Math.floor(Math.random() * 500) + 100;
+            if (customer.deposits >= amount && bank.vault >= amount) {
+                customer.deposits -= amount;
+                customer.cash += amount;
+                bank.vault -= amount;
+                logTransaction(`Customer ${customerId} withdrew $${amount} in cash`);
+            } else {
+                logTransaction(`Customer ${customerId} withdrawal of $${amount} failed - insufficient funds`);
+            }
+            updateDisplay();
+        }
+
+        function depositCash(customerId) {
+            const customer = customers[customerId - 1];
+            const amount = Math.floor(Math.random() * 500) + 100;
+            if (customer.cash >= amount) {
+                customer.cash -= amount;
+                customer.deposits += amount;
+                bank.vault += amount;
+                logTransaction(`Customer ${customerId} deposited $${amount} in cash`);
+            } else {
+                logTransaction(`Customer ${customerId} cash deposit of $${amount} failed - insufficient cash`);
+            }
+            updateDisplay();
+        }
+
+        function requestPropertyLoan(customerId) {
+            const customer = customers[customerId - 1];
+            const loanAmount = Math.floor(Math.random() * 20000) + 5000;
+            if (bank.vault >= loanAmount) {
+                bank.vault -= loanAmount;
+                bank.assets += loanAmount;
+                customer.properties += 1;
+                customer.liabilities += loanAmount;
+                logTransaction(`Customer ${customerId} took property loan of $${loanAmount} for property #${customer.properties}`);
+            } else {
+                logTransaction(`Customer ${customerId} loan of $${loanAmount} denied - bank vault too low`);
+            }
+            updateDisplay();
+        }
+
+        function requestReserves() {
+            const reserveAmount = Math.floor(Math.random() * 50000) + 10000;
+            if (federalReserve.reserves >= reserveAmount) {
+                federalReserve.reserves -= reserveAmount;
+                bank.reserves += reserveAmount;
+                bank.vault += reserveAmount;
+                logTransaction(`Bank received $${reserveAmount} in reserves from Federal Reserve`);
+            } else {
+                logTransaction(`Reserve request of $${reserveAmount} denied - insufficient Federal Reserve reserves`);
+            }
+            updateDisplay();
+        }
+
+        function buyTBillFromTreasury() {
+            if (federalReserve.reserves >= TBILL_VALUE) {
+                if (treasury.liabilities === 0) {
+                    logTransaction(`US Treasury created a T-Bill on demand for Federal Reserve purchase of $${TBILL_VALUE}`);
+                }
+                federalReserve.reserves -= TBILL_VALUE;
+                federalReserve.tBills += 1;
+                treasury.liabilities += TBILL_VALUE;
+                treasury.cash += TBILL_VALUE;
+                logTransaction(`Federal Reserve bought a T-Bill from Treasury for $${TBILL_VALUE}`);
+            } else {
+                logTransaction(`Federal Reserve T-Bill purchase denied - insufficient reserves`);
+            }
+            updateDisplay();
+        }
+
+        function buyTBill(entityId) {
+            let entity, cashSource, tBillTarget, name;
+            if (entityId === 0) { // Bank Branch
+                entity = bank;
+                cashSource = 'vault';
+                tBillTarget = 'tBills';
+                name = 'Bank';
+            } else { // Customer
+                entity = customers[entityId - 1];
+                cashSource = 'deposits';
+                tBillTarget = 'tBills';
+                name = `Customer ${entityId}`;
+            }
+
+            if (entity[cashSource] >= TBILL_VALUE) {
+                if (treasury.liabilities === 0) {
+                    logTransaction(`US Treasury created a T-Bill on demand for ${name} purchase of $${TBILL_VALUE}`);
+                }
+                entity[cashSource] -= TBILL_VALUE;
+                entity[tBillTarget] += 1;
+                treasury.liabilities += TBILL_VALUE;
+                treasury.cash += TBILL_VALUE;
+                logTransaction(`${name} bought a T-Bill from Treasury for $${TBILL_VALUE}`);
+            } else {
+                logTransaction(`${name} T-Bill purchase denied - insufficient funds`);
+            }
+            updateDisplay();
+        }
+
+        function createTBill() {
+            treasury.liabilities += TBILL_VALUE;
+            logTransaction(`US Treasury created a T-Bill worth $${TBILL_VALUE}`);
+            updateDisplay();
+        }
+
+        function sellTBill(entityId) {
+            let entity, cashTarget, tBillSource, name;
+            if (entityId === 0) { // Bank Branch
+                entity = bank;
+                cashTarget = 'vault';
+                tBillSource = 'tBills';
+                name = 'Bank';
+            } else if (entityId === -1) { // Federal Reserve
+                entity = federalReserve;
+                cashTarget = 'reserves';
+                tBillSource = 'tBills';
+                name = 'Federal Reserve';
+            } else { // Customer
+                entity = customers[entityId - 1];
+                cashTarget = 'deposits';
+                tBillSource = 'tBills';
+                name = `Customer ${entityId}`;
+            }
+
+            if (entity[tBillSource] > 0 && treasury.cash >= TBILL_VALUE) {
+                entity[tBillSource] -= 1;
+                entity[cashTarget] += TBILL_VALUE;
+                treasury.liabilities -= TBILL_VALUE;
+                treasury.cash -= TBILL_VALUE;
+                logTransaction(`${name} sold a T-Bill to Treasury for $${TBILL_VALUE}`);
+            } else if (entity[tBillSource] <= 0) {
+                logTransaction(`${name} T-Bill sale denied - no T-Bills to sell`);
+            } else {
+                logTransaction(`${name} T-Bill sale denied - insufficient Treasury cash`);
+            }
+            updateDisplay();
+        }
+
+        // Initial display update
+        updateDisplay();
+    </script>
+</body>
+</html>

@@ -2,6 +2,13 @@
 
 A simulation of US Banking system.  Inspired by Lyn Alden's book Broken Money ch.15
 
+# Info
+
+TODO
+
+
+# Versions
+
 ## v1
 
 Version one has some problems:

@@ -20,5 +20,11 @@ Version one has some problems:
 
 ## v2
 
-TODO: In progress
+Version has the following issues I want to improve on next version:
 
+1. Support for some Open Market Operations
+2. Display "total national debt" at the top.  Need to figure out how to calculate this.
+
+## v3
+
+TODO

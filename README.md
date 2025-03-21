@@ -9,7 +9,7 @@ TODO
 
 # Versions
 
-## v1
+## v1 - 01/30/2025
 
 Version one has some problems:
 
@@ -18,7 +18,7 @@ Version one has some problems:
 3. Needs an additional bank branch in simulation
 4. Needs 3 bank customers on the simulation
 
-## v2
+## v2 - 03/20/2025
 
 Version has the following issues I want to improve on next version:
 

@@ -1,0 +1,78 @@
+:host {
+  display: block;
+}
+
+/* ── Fed ledger panels (deep green) ──────────────────────────── */
+
+.ledger-panel {
+  background: #F0F8F2;
+  border: 1px solid rgba(27, 67, 50, 0.18);
+  border-radius: 2px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+}
+
+.liabilities-panel {
+  background: #FEF8F8;
+  border-color: rgba(165, 32, 32, 0.12);
+}
+
+.panel-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1B4332;
+  margin-bottom: 4px;
+  opacity: 0.75;
+}
+
+.panel-label.liabilities {
+  color: #A52020;
+}
+
+/* ── IORB policy card ─────────────────────────────────────────── */
+
+.policy-card {
+  background: linear-gradient(
+    135deg,
+    #0A1F14 0%,
+    #1B4332 100%
+  );
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #0A1F14;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.policy-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 39, 0.7);
+  margin-bottom: 4px;
+}
+
+.policy-rate {
+  font-family: 'Courier Prime', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #E8D07A;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(232, 208, 122, 0.4);
+  margin-bottom: 4px;
+}
+
+.pct {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.policy-sub {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+  line-height: 1.4;
+}

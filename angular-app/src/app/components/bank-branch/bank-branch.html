@@ -1,0 +1,62 @@
+<h3>Bank Branch</h3>
+
+<div class="ledger-panel assets-panel">
+  <div class="panel-label">Assets</div>
+  <div class="data-row">
+    <span class="label">Reserves at Fed</span>
+    <span class="value">${{ sim.bank().reserveBalance.toFixed(2) }}</span>
+  </div>
+  <div class="data-row">
+    <span class="label">Loans Outstanding</span>
+    <span class="value">${{ sim.bank().loanAssets }}</span>
+  </div>
+  <div class="data-row">
+    <span class="label">T-Bills</span>
+    <span class="value neutral">{{ sim.bank().tBills }}</span>
+  </div>
+  <div class="data-row total-row">
+    <span class="label">Total Assets</span>
+    <span class="value">${{ sim.bankTotalAssets().toFixed(2) }}</span>
+  </div>
+</div>
+
+<div class="ledger-panel liabilities-panel">
+  <div class="panel-label liabilities">Liabilities</div>
+  <div class="data-row">
+    <span class="label">Customer Deposits</span>
+    <span class="value negative">${{ sim.bank().depositLiabilities }}</span>
+  </div>
+  <div class="data-row">
+    <span class="label">Discount Window Debt</span>
+    <span class="value negative">${{ sim.bank().discountWindowDebt }}</span>
+  </div>
+</div>
+
+<div class="equity-card" [class.equity-warning]="sim.bankCapitalRatio() < sim.minCapitalRatio()">
+  <div class="equity-header">
+    <span class="equity-label">Equity (Capital)</span>
+    @if (sim.bankCapitalRatio() < sim.minCapitalRatio()) {
+      <span class="warn-badge">⚠ Below Min</span>
+    }
+  </div>
+  <div class="equity-value">${{ sim.bankEquity().toFixed(2) }}</div>
+  <div class="capital-ratio-bar">
+    <div
+      class="capital-ratio-fill"
+      [style.width.%]="Math.min(sim.bankCapitalRatio(), 100)"
+      [class.low]="sim.bankCapitalRatio() < sim.minCapitalRatio()"
+    ></div>
+  </div>
+  <div class="capital-ratio-label">
+    Capital Ratio: {{ sim.bankCapitalRatio().toFixed(1) }}%
+    <span class="min-label">(min {{ sim.minCapitalRatio() }}%)</span>
+  </div>
+</div>
+
+<div class="buttons">
+  <button (click)="sim.bankBorrowFromFed()">Borrow from Fed (Discount Window)</button>
+  <button (click)="sim.bankRepayFed()">Repay Fed</button>
+  <button (click)="sim.bankBuyTBillFromDealer()">Buy T-Bill from Dealer</button>
+  <button (click)="sim.bankSellTBillToDealer()">Sell T-Bill to Dealer</button>
+</div>
+

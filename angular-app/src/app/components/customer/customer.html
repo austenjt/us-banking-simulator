@@ -1,0 +1,37 @@
+<div class="customer-card">
+  <div class="customer-name">Customer {{ customer.id }}</div>
+
+  <div class="ledger">
+    <div class="ledger-section-label">Assets</div>
+    <div class="data-row">
+      <span class="label">Deposits</span>
+      <span class="value">${{ customer.deposits }}</span>
+    </div>
+    <div class="data-row">
+      <span class="label">Cash</span>
+      <span class="value">${{ customer.cash }}</span>
+    </div>
+    <div class="data-row">
+      <span class="label">T-Bills</span>
+      <span class="value neutral">{{ customer.tBills }}</span>
+    </div>
+    <div class="data-row">
+      <span class="label">Property</span>
+      <span class="value neutral">{{ customer.properties }}</span>
+    </div>
+    <div class="ledger-section-label liabilities">Liabilities</div>
+    <div class="data-row">
+      <span class="label">Loans</span>
+      <span class="value negative">${{ customer.loanLiabilities }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="buttons">
+  <button (click)="sim.depositPaycheck(customerId)">Deposit Paycheck</button>
+  <button (click)="sim.withdrawCash(customerId)" [disabled]="customer.deposits === 0">Withdraw Cash</button>
+  <button (click)="sim.depositCash(customerId)" [disabled]="customer.cash === 0" title="Requires physical cash — withdraw first">Deposit Cash</button>
+  <button (click)="sim.requestPropertyLoan(customerId)">Request Mortgage Loan</button>
+  <button (click)="sim.customerBuyTBill(customerId)" [disabled]="customer.deposits < 1000">Buy T-Bill (TreasuryDirect)</button>
+  <button (click)="sim.customerSellTBill(customerId)" [disabled]="customer.tBills === 0">Redeem T-Bill</button>
+</div>

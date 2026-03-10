@@ -1,0 +1,39 @@
+<app-header />
+
+<div class="content">
+  <div class="column customers-column">
+    <h3>Customers</h3>
+    <app-customer [customerId]="1" />
+    <app-customer [customerId]="2" />
+  </div>
+
+  <div class="column bank-column">
+    <app-bank-branch />
+  </div>
+
+  <div class="right-section">
+    <div class="right-panels">
+      <div class="column dealer-column">
+        <app-primary-dealer />
+      </div>
+      <div class="column fed-column">
+        <app-federal-reserve />
+      </div>
+      <div class="column treasury-column">
+        <app-treasury />
+      </div>
+    </div>
+
+    <div class="log-panel">
+      <app-transaction-log />
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    Inspired by Lyn Alden's book
+    <a href="https://www.amazon.com/stores/author/B0CGM4XMPV/allbooks" target="_blank">Broken Money</a>,
+    Chapter 15. Reserve requirements eliminated March 2020; lending now constrained by capital ratios (Basel III).
+  </p>
+</footer>

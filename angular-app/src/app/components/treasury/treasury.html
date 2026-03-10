@@ -1,0 +1,32 @@
+<h3>US Treasury</h3>
+
+<div class="ledger-panel liabilities-panel">
+  <div class="panel-label liabilities">Liabilities</div>
+  <div class="data-row">
+    <span class="label">T-Bills Outstanding</span>
+    <span class="value negative">{{ sim.treasury().tBillsOutstanding }}</span>
+  </div>
+  <div class="data-row">
+    <span class="label">Face Value</span>
+    <span class="value negative">${{ sim.treasury().tBillsOutstanding * 1000 }}</span>
+  </div>
+</div>
+
+<div class="ledger-panel assets-panel">
+  <div class="panel-label">Assets</div>
+  <div class="data-row">
+    <span class="label">T-Bills (inventory)</span>
+    <span class="value neutral">{{ sim.treasury().tBillsInventory }}</span>
+  </div>
+  <div class="tga-card">
+    <div class="tga-label">TGA Balance at Fed</div>
+    <div class="tga-value">${{ sim.treasury().tga }}</div>
+  </div>
+</div>
+
+<p class="note">TGA&uarr; when T-Bills are sold at auction. TGA&darr; when the government spends. Spending injects reserves back into the banking system (fiscal channel).</p>
+
+<div class="buttons">
+  <button (click)="sim.createTBill()">Create T-Bill (add to inventory)</button>
+  <button class="btn-spend" (click)="sim.treasurySpend()">Spend $1,000 from TGA → Customer 1</button>
+</div>

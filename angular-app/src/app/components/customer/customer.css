@@ -1,0 +1,78 @@
+:host {
+  display: block;
+}
+
+:host + :host {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(11, 110, 110, 0.2);
+}
+
+/* ── Customer card ────────────────────────────────────────────── */
+
+.customer-card {
+  margin-bottom: 4px;
+}
+
+.customer-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0B6E6E;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+/* ── Ledger ───────────────────────────────────────────────────── */
+
+.ledger {
+  background: #F8FDFB;
+  border: 1px solid rgba(11, 110, 110, 0.12);
+  border-radius: 2px;
+  padding: 6px 8px;
+}
+
+.ledger-section-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0B6E6E;
+  margin: 4px 0 2px;
+  opacity: 0.7;
+}
+
+.ledger-section-label.liabilities {
+  color: #A52020;
+  margin-top: 8px;
+  border-top: 1px dotted rgba(11, 110, 110, 0.15);
+  padding-top: 6px;
+}
+
+/* ── Teal buttons for customer entity ────────────────────────── */
+
+button {
+  background: linear-gradient(
+    180deg,
+    #1A8080 0%,
+    #0B6E6E 100%
+  );
+  border-color: #085555;
+}
+
+button:hover {
+  background: linear-gradient(
+    180deg,
+    #21A0A0 0%,
+    #1A8080 100%
+  );
+}
+
+button:disabled {
+  background: linear-gradient(180deg, #aaa 0%, #888 100%);
+  border-color: #666;
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

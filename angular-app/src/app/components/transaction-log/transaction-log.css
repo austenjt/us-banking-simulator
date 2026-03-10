@@ -1,0 +1,134 @@
+/* ── Transaction Ledger — Terminal / Ticker Tape Style ─────────── */
+
+.log-shell {
+  margin-top: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(82, 183, 136, 0.1);
+}
+
+/* Header bar */
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  background: linear-gradient(
+    90deg,
+    #0A1F14 0%,
+    #152D20 100%
+  );
+  border-bottom: 1px solid rgba(82, 183, 136, 0.2);
+}
+
+.log-title {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(82, 183, 136, 0.7);
+}
+
+.log-count {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  color: rgba(201, 162, 39, 0.5);
+}
+
+/* Scrollable log area — terminal green-on-black */
+.log {
+  height: 200px;
+  overflow-y: auto;
+  background: #08150E;
+  padding: 8px 10px;
+
+  /* Subtle scanline CRT overlay */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 3px
+    );
+}
+
+/* Custom scrollbar — green terminal style */
+.log::-webkit-scrollbar {
+  width: 5px;
+}
+.log::-webkit-scrollbar-track {
+  background: #040D08;
+}
+.log::-webkit-scrollbar-thumb {
+  background: #2D6A4F;
+  border-radius: 2px;
+}
+.log::-webkit-scrollbar-thumb:hover {
+  background: #52B788;
+}
+
+/* ── Log entries ─────────────────────────────────────────────── */
+
+.log-entry {
+  display: flex;
+  gap: 8px;
+  padding: 2px 0;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(82, 183, 136, 0.06);
+  animation: entry-fade-in 0.3s ease forwards;
+}
+
+@keyframes entry-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* The most recent entry gets a brief highlight */
+.log-entry-new {
+  animation: entry-highlight 1.2s ease forwards;
+}
+
+@keyframes entry-highlight {
+  0%   { background: rgba(201, 162, 39, 0.18); opacity: 0; transform: translateX(-4px); }
+  15%  { background: rgba(201, 162, 39, 0.12); opacity: 1; transform: translateX(0); }
+  100% { background: transparent; }
+}
+
+.log-time {
+  flex-shrink: 0;
+  color: rgba(201, 162, 39, 0.55);
+  font-size: 0.66rem;
+  padding-top: 1px;
+  white-space: nowrap;
+}
+
+.log-msg {
+  color: #52B788;
+  word-break: break-word;
+}
+
+.log-empty {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: rgba(82, 183, 136, 0.3);
+  font-style: italic;
+  padding: 4px 0;
+  animation: blink 1.4s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}

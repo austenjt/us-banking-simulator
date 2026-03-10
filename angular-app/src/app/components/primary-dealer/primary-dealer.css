@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+/* ── Ledger panel (amber/gold tint) ──────────────────────────── */
+
+.ledger-panel {
+  background: #FFFBF0;
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  border-radius: 2px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+}
+
+.panel-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9A7B2F;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+/* ── Dealer-specific button gradients ────────────────────────── */
+
+/* Treasury auction button — amber */
+button.btn-auction {
+  background: linear-gradient(180deg, #D4A030 0%, #9A7B2F 100%);
+  border-color: #7B5E0A;
+}
+button.btn-auction:hover {
+  background: linear-gradient(180deg, #E0B040 0%, #B08030 100%);
+}
+
+/* OMO — buys T-bill from dealer = green (creates reserves) */
+button.btn-omo-buy {
+  background: linear-gradient(180deg, #2D9B6A 0%, #1B6A48 100%);
+  border-color: #0D4030;
+}
+button.btn-omo-buy:hover {
+  background: linear-gradient(180deg, #3AB87D 0%, #2D8060 100%);
+}
+
+/* QT — sells T-bill to dealer = red-ish (destroys reserves) */
+button.btn-omo-sell {
+  background: linear-gradient(180deg, #904040 0%, #6B2525 100%);
+  border-color: #4A1515;
+}
+button.btn-omo-sell:hover {
+  background: linear-gradient(180deg, #A85050 0%, #883535 100%);
+}
+
+/* Secondary market — neutral dark */
+button.btn-secondary {
+  background: linear-gradient(180deg, #7A6A3A 0%, #5A4C22 100%);
+  border-color: #3A3010;
+}
+button.btn-secondary:hover {
+  background: linear-gradient(180deg, #8A7A4A 0%, #6A5C32 100%);
+}

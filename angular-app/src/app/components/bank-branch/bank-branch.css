@@ -1,0 +1,141 @@
+:host {
+  display: block;
+}
+
+/* ── Ledger panels ────────────────────────────────────────────── */
+
+.ledger-panel {
+  background: #F6FCF8;
+  border: 1px solid rgba(45, 106, 79, 0.15);
+  border-radius: 2px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+}
+
+.liabilities-panel {
+  background: #FEF8F8;
+  border-color: rgba(165, 32, 32, 0.12);
+}
+
+.panel-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2D6A4F;
+  margin-bottom: 4px;
+  opacity: 0.75;
+}
+
+.panel-label.liabilities {
+  color: #A52020;
+}
+
+.total-row {
+  border-top: 1px solid rgba(45, 106, 79, 0.2);
+  margin-top: 4px;
+  padding-top: 4px;
+}
+
+.total-row .label {
+  font-weight: 700;
+  color: #2D6A4F;
+}
+
+.total-row .value {
+  font-size: 0.9rem;
+  color: #1B4332;
+}
+
+/* ── Equity card ──────────────────────────────────────────────── */
+
+.equity-card {
+  background: linear-gradient(135deg, #EEF9EF 0%, #F2FBF3 100%);
+  border: 1px solid rgba(45, 106, 79, 0.25);
+  border-radius: 3px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+}
+
+.equity-card.equity-warning {
+  background: linear-gradient(135deg, #FFF3E8 0%, #FEF6EE 100%);
+  border-color: rgba(200, 80, 20, 0.3);
+}
+
+.equity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.equity-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2D6A4F;
+  opacity: 0.75;
+}
+
+.equity-value {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1B4332;
+  margin-bottom: 6px;
+}
+
+.equity-warning .equity-value {
+  color: #8B3010;
+}
+
+.warn-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #B84010;
+  border: 1px solid rgba(184, 64, 16, 0.35);
+  padding: 1px 5px;
+  border-radius: 2px;
+  background: rgba(255, 230, 200, 0.6);
+  animation: warn-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes warn-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+/* ── Capital ratio progress bar ──────────────────────────────── */
+
+.capital-ratio-bar {
+  height: 5px;
+  background: rgba(27, 67, 50, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.capital-ratio-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #52B788 0%, #2D6A4F 100%);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  min-width: 2px;
+}
+
+.capital-ratio-fill.low {
+  background: linear-gradient(90deg, #E88050 0%, #B84010 100%);
+}
+
+.capital-ratio-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.76rem;
+  color: #2D6A4F;
+}
+
+.min-label {
+  color: #8F8F72;
+  font-size: 0.7rem;
+}

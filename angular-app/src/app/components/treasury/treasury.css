@@ -1,0 +1,85 @@
+:host {
+  display: block;
+}
+
+/* ── Treasury ledger panels (gold tint) ──────────────────────── */
+
+.ledger-panel {
+  border-radius: 2px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+}
+
+.assets-panel {
+  background: #FFFBF0;
+  border: 1px solid rgba(201, 162, 39, 0.22);
+}
+
+.liabilities-panel {
+  background: #FEF8F8;
+  border: 1px solid rgba(165, 32, 32, 0.12);
+}
+
+.panel-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9A7B2F;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.panel-label.liabilities {
+  color: #A52020;
+}
+
+/* ── TGA highlight card ───────────────────────────────────────── */
+
+.tga-card {
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: linear-gradient(135deg, #FFF8D8 0%, #FFFBEA 100%);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.tga-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9A7B2F;
+  opacity: 0.75;
+  margin-bottom: 2px;
+}
+
+.tga-value {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #7B5E0A;
+}
+
+/* ── Gold buttons for treasury ────────────────────────────────── */
+
+button {
+  background: linear-gradient(180deg, #C9A227 0%, #9A7B2F 100%);
+  border-color: #7B5E0A;
+  color: #0A0A08;
+}
+
+button:hover {
+  background: linear-gradient(180deg, #D4B53C 0%, #B08030 100%);
+}
+
+button.btn-spend {
+  background: linear-gradient(180deg, #4A8060 0%, #2D6048 100%);
+  border-color: #1A4030;
+  color: #FDFBF4;
+}
+
+button.btn-spend:hover {
+  background: linear-gradient(180deg, #5A9070 0%, #3D7058 100%);
+}

@@ -1,0 +1,36 @@
+<div class="header">
+
+  <div class="header-brand">
+    <div class="seal" aria-hidden="true">$</div>
+    <div class="header-titles">
+      <h1>Banking Simulation</h1>
+      <span class="header-subtitle">Board of Governors &middot; Federal Reserve System</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="capitalRatio">Min Capital Ratio&nbsp;(%):</label>
+      <input
+        type="number"
+        id="capitalRatio"
+        min="0"
+        max="100"
+        step="1"
+        [value]="sim.minCapitalRatio()"
+        [disabled]="sim.constraintLocked()"
+        (change)="onCapitalRatioChange($event)"
+        title="Minimum equity/assets ratio required before the bank can lend. Reserve requirements were eliminated March 2020; modern lending is constrained by Basel III capital ratios."
+      />
+      @if (sim.constraintLocked()) {
+        <span class="locked-badge">LOCKED</span>
+      }
+    </div>
+    <div class="control-group iorb-group">
+      <span class="iorb-label">IORB</span>
+      <span class="iorb-value">{{ sim.fed().iorb }}%</span>
+      <span class="iorb-note">Fed policy floor</span>
+    </div>
+  </div>
+
+</div>

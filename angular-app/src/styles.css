@@ -1,0 +1,246 @@
+/* ============================================================
+   US FEDERAL RESERVE BANKING SIMULATION
+   Global Design System — CSS Custom Properties & Base Styles
+   ============================================================ */
+
+:root {
+  /* ── Currency Greens ── */
+  --green-900: #0A1F14;
+  --green-800: #1B4332;
+  --green-700: #2D6A4F;
+  --green-600: #40916C;
+  --green-500: #52B788;
+  --green-200: #B7E4C7;
+  --green-100: #D8F3DC;
+  --green-50:  #F0FBF3;
+
+  /* ── Gold / Metallic Ink ── */
+  --gold-900:  #5C420A;
+  --gold-700:  #9A7B2F;
+  --gold-500:  #C9A227;
+  --gold-400:  #D4B53C;
+  --gold-200:  #EAD07F;
+  --gold-100:  #F5E9A8;
+  --gold-50:   #FFFBEA;
+
+  /* ── Parchment / Paper ── */
+  --paper-base: #FDFBF4;
+  --paper-mid:  #F0EADA;
+  --paper-dark: #D8CDAD;
+
+  /* ── Ink ── */
+  --ink-900: #0A0A08;
+  --ink-700: #1C1C15;
+  --ink-500: #3E3E2E;
+  --ink-300: #6A6A52;
+  --ink-200: #908F72;
+
+  /* ── Entity Accent Colors ── */
+  --accent-customer: #0B6E6E;
+  --accent-bank:     #2D6A4F;
+  --accent-dealer:   #C9A227;
+  --accent-fed:      #1B4332;
+  --accent-treasury: #9A7B2F;
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:    'Courier Prime', 'Courier New', Courier, monospace;
+
+  /* ── Shape ── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: var(--font-body);
+  color: var(--ink-700);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* Parchment base */
+  background-color: var(--paper-base);
+
+  /* Security-paper crosshatch — diagonal microlines at low opacity */
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 18px,
+      rgba(27, 67, 50, 0.048) 18px,
+      rgba(27, 67, 50, 0.048) 19px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      transparent 18px,
+      rgba(201, 162, 39, 0.028) 18px,
+      rgba(201, 162, 39, 0.028) 19px
+    );
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+
+h3 {
+  margin: 0 0 10px 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ── Buttons — Engraved Intaglio Style ──────────────────────── */
+
+button {
+  display: block;
+  width: 100%;
+  margin: 4px 0;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--paper-base);
+  text-align: center;
+
+  background: linear-gradient(
+    180deg,
+    var(--green-600) 0%,
+    var(--green-800) 100%
+  );
+  border: 1px solid var(--green-900);
+  border-radius: var(--radius-sm);
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.12s ease,
+    transform 0.08s ease,
+    box-shadow 0.08s ease;
+}
+
+button:hover {
+  background: linear-gradient(
+    180deg,
+    var(--green-500) 0%,
+    var(--green-700) 100%
+  );
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.buttons {
+  margin-top: 12px;
+}
+
+/* ── Data Rows (used in entity columns) ─────────────────────── */
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2px 0;
+  border-bottom: 1px dotted var(--paper-dark);
+  font-size: 0.82rem;
+  gap: 6px;
+}
+
+.data-row:last-of-type {
+  border-bottom: none;
+}
+
+.label {
+  color: var(--ink-300);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--green-700);
+  text-align: right;
+}
+
+.value.negative {
+  color: #A52020;
+}
+
+.value.neutral {
+  color: var(--ink-500);
+}
+
+/* ── Section dividers inside entity panels ───────────────────── */
+
+.section {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--paper-mid);
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.section-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-200);
+  margin-bottom: 4px;
+}
+
+/* ── Notes / annotations ────────────────────────────────────── */
+
+.note {
+  font-size: 0.72rem;
+  color: var(--ink-200);
+  font-style: italic;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+/* ── Links ──────────────────────────────────────────────────── */
+
+a {
+  color: var(--green-700);
+}
+
+a:hover {
+  color: var(--gold-500);
+}

@@ -1,0 +1,17 @@
+<div class="log-shell">
+  <div class="log-header">
+    <span class="log-title">Transaction Ledger</span>
+    <span class="log-count">{{ sim.log().length }} entries</span>
+  </div>
+  <div class="log" #logContainer>
+    @for (entry of sim.log(); track $index) {
+      <div class="log-entry" [class.log-entry-new]="$index === sim.log().length - 1">
+        <span class="log-time">{{ entry.time }}</span>
+        <span class="log-msg">{{ entry.message }}</span>
+      </div>
+    }
+    @if (sim.log().length === 0) {
+      <div class="log-empty">Awaiting first transaction…</div>
+    }
+  </div>
+</div>

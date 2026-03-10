@@ -1,0 +1,137 @@
+/* ── Main Content ────────────────────────────────────────────── */
+
+.content {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;   /* all children grow to the same height */
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+/* ── Right section: cols 3-5 above, log pinned at bottom ─────── */
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.right-panels {
+  display: flex;
+  gap: 14px;
+}
+
+.log-panel {
+  margin-top: auto;   /* pushes log to the bottom of .right-section */
+}
+
+/* ── Column Base ─────────────────────────────────────────────── */
+
+.column {
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid var(--paper-dark, #D8CDAD);
+  border-top-width: 4px;
+  border-radius: var(--radius-md, 4px);
+  flex-shrink: 0;
+
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.07),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.column:hover {
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.12),
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+/* ── Column Sizing ───────────────────────────────────────────── */
+
+.customers-column { width: 270px; }
+.bank-column      { flex: 1; min-width: 270px; }
+.dealer-column    { width: 230px; }
+.fed-column       { width: 252px; }
+.treasury-column  { width: 230px; }
+
+/* ── Entity-Specific Accent Colors ──────────────────────────── */
+
+.customers-column {
+  border-top-color: #0B6E6E;
+  background: linear-gradient(180deg, #F2FBFB 0%, #ffffff 60px);
+}
+.customers-column h3 {
+  color: #0B6E6E;
+  border-bottom: 1px solid rgba(11, 110, 110, 0.2);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.bank-column {
+  border-top-color: #2D6A4F;
+  background: linear-gradient(180deg, #F2FBF5 0%, #ffffff 60px);
+}
+.bank-column h3 {
+  color: #2D6A4F;
+  border-bottom: 1px solid rgba(45, 106, 79, 0.2);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.dealer-column {
+  border-top-color: #C9A227;
+  background: linear-gradient(180deg, #FFFBEE 0%, #ffffff 60px);
+}
+.dealer-column h3 {
+  color: #9A7B2F;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.fed-column {
+  border-top-color: #1B4332;
+  background: linear-gradient(180deg, #EDF5EE 0%, #ffffff 60px);
+}
+.fed-column h3 {
+  color: #1B4332;
+  border-bottom: 1px solid rgba(27, 67, 50, 0.22);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.treasury-column {
+  border-top-color: #9A7B2F;
+  background: linear-gradient(180deg, #FFFAE8 0%, #ffffff 60px);
+}
+.treasury-column h3 {
+  color: #7B5E0A;
+  border-bottom: 1px solid rgba(154, 123, 47, 0.28);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+
+footer {
+  margin-top: 18px;
+  padding: 12px 24px;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(27, 67, 50, 0.03) 0%,
+    rgba(27, 67, 50, 0.06) 100%
+  );
+  border-top: 1px solid var(--paper-dark, #D8CDAD);
+  font-family: var(--font-body, Georgia, serif);
+  font-size: 0.76rem;
+  color: var(--ink-300, #6A6A52);
+  letter-spacing: 0.03em;
+}

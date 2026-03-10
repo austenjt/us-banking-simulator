@@ -1,0 +1,23 @@
+<h3>Primary Dealer</h3>
+
+<p class="note">Required intermediary between Treasury auctions and Fed OMO. The Fed is prohibited from buying T-Bills directly from the Treasury.</p>
+
+<div class="ledger-panel">
+  <div class="panel-label">Assets</div>
+  <div class="data-row">
+    <span class="label">T-Bills (inventory)</span>
+    <span class="value neutral">{{ sim.primaryDealer().tBills }}</span>
+  </div>
+  <div class="data-row">
+    <span class="label">Reserve Balance</span>
+    <span class="value">${{ sim.primaryDealer().reserveBalance }}</span>
+  </div>
+</div>
+
+<div class="buttons">
+  <button class="btn-auction" (click)="sim.dealerBuyTBillAtAuction()">Buy T-Bill at Treasury Auction</button>
+  <button class="btn-omo-buy" (click)="sim.fedBuyTBillFromDealer()">Sell T-Bill to Fed&nbsp;(OMO ↑ reserves)</button>
+  <button class="btn-omo-sell" (click)="sim.fedSellTBillToDealer()">Buy T-Bill from Fed&nbsp;(QT ↓ reserves)</button>
+  <button class="btn-secondary" (click)="sim.bankBuyTBillFromDealer()">Sell T-Bill to Bank</button>
+  <button class="btn-secondary" (click)="sim.bankSellTBillToDealer()">Buy T-Bill from Bank</button>
+</div>

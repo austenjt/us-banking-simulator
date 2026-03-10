@@ -1,0 +1,242 @@
+/* ── Federal Reserve Official Header ─────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 14px 22px;
+  margin-bottom: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #0A1F14 0%,
+    #1B4332 45%,
+    #152D22 100%
+  );
+
+  border: 1px solid #0A1F14;
+  border-radius: 4px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(201, 162, 39, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold rule at the very bottom */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #9A7B2F 10%,
+    #C9A227 30%,
+    #E8D07A 50%,
+    #C9A227 70%,
+    #9A7B2F 90%,
+    transparent 100%
+  );
+}
+
+/* Subtle security micropattern on header */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 6px,
+      rgba(255, 255, 255, 0.018) 6px,
+      rgba(255, 255, 255, 0.018) 7px
+    );
+  pointer-events: none;
+}
+
+/* ── Brand (seal + titles) ───────────────────────────────────── */
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.seal {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  /* Engraved coin look */
+  background: radial-gradient(
+    circle at 38% 32%,
+    rgba(228, 192, 80, 0.18) 0%,
+    rgba(10, 31, 20, 0.7) 65%
+  );
+
+  border: 2px solid #C9A227;
+  box-shadow:
+    0 0 0 4px rgba(201, 162, 39, 0.18),
+    0 0 16px rgba(201, 162, 39, 0.12),
+    inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 2px rgba(201, 162, 39, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C9A227;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.6),
+    0 0 12px rgba(201, 162, 39, 0.3);
+
+  /* Gentle shimmer pulse */
+  animation: seal-pulse 4s ease-in-out infinite;
+}
+
+@keyframes seal-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.18), 0 0 16px rgba(201, 162, 39, 0.12), inset 0 2px 4px rgba(0, 0, 0, 0.4); }
+  50%       { box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.28), 0 0 24px rgba(201, 162, 39, 0.22), inset 0 2px 4px rgba(0, 0, 0, 0.4); }
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-titles h1 {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  line-height: 1.15;
+}
+
+.header-subtitle {
+  display: block;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.67rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A227;
+  margin-top: 3px;
+  opacity: 0.85;
+}
+
+/* ── Controls ────────────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.control-group label {
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+.control-group input[type='number'] {
+  width: 58px;
+  padding: 4px 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1B4332;
+  background: #FDFBF4;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: border-color 0.15s;
+}
+
+.control-group input[type='number']:focus {
+  outline: none;
+  border-color: #C9A227;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.control-group input[type='number']:disabled {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(201, 162, 39, 0.55);
+  border-color: rgba(201, 162, 39, 0.2);
+  cursor: not-allowed;
+}
+
+.locked-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #C9A227;
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  padding: 1px 5px;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+/* ── IORB display ────────────────────────────────────────────── */
+
+.iorb-group {
+  border-left: 1px solid rgba(201, 162, 39, 0.22);
+  padding-left: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.iorb-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.iorb-value {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #E8D07A;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(232, 208, 122, 0.35);
+}
+
+.iorb-note {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.38);
+  font-style: italic;
+}

@@ -14,8 +14,6 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  flex: 1;
-  min-width: 0;
 }
 
 .right-panels {
@@ -55,11 +53,11 @@
 
 /* ── Column Sizing ───────────────────────────────────────────── */
 
-.customers-column { width: 270px; }
-.bank-column      { flex: 1; min-width: 270px; }
-.dealer-column    { width: 230px; }
-.fed-column       { width: 252px; }
-.treasury-column  { width: 230px; }
+.customers-column,
+.bank-column,
+.dealer-column,
+.fed-column,
+.treasury-column { width: 260px; flex: 0 0 260px; }
 
 /* ── Entity-Specific Accent Colors ──────────────────────────── */
 

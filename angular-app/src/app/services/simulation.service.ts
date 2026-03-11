@@ -85,6 +85,30 @@ export class SimulationService {
     return (this.bankEquity() / assets) * 100;
   });
 
+  readonly currencyInCirculation = computed(() =>
+    this.customers().reduce((sum, c) => sum + c.cash, 0)
+  );
+
+  /** M1: demand deposits + currency in circulation. */
+  readonly m1 = computed(() =>
+    this.customers().reduce((sum, c) => sum + c.deposits + c.cash, 0)
+  );
+
+  /** Monetary base (M0): system reserves + currency in circulation. */
+  readonly monetaryBase = computed(() =>
+    this.fedReserveBalances() + this.currencyInCirculation()
+  );
+
+  /** Total face value of all outstanding Treasury T-Bills. */
+  readonly nationalDebt = computed(() =>
+    this.treasury().tBillsOutstanding * TBILL_VALUE
+  );
+
+  /** Total customer loan liabilities. */
+  readonly totalPrivateDebt = computed(() =>
+    this.customers().reduce((sum, c) => sum + c.loanLiabilities, 0)
+  );
+
   // ── Infrastructure ─────────────────────────────────────────────────────────
 
   setMinCapitalRatio(value: number): void {

@@ -57,7 +57,17 @@
 .bank-column,
 .dealer-column,
 .fed-column,
-.treasury-column { width: 260px; flex: 0 0 260px; }
+.treasury-column,
+.stats-column { width: 260px; flex: 0 0 260px; }
+
+/* ── Treasury + Stats stacked in the same column slot ────────── */
+
+.treasury-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 0 0 260px;
+}
 
 /* ── Entity-Specific Accent Colors ──────────────────────────── */
 
@@ -112,6 +122,17 @@
 .treasury-column h3 {
   color: #7B5E0A;
   border-bottom: 1px solid rgba(154, 123, 47, 0.28);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.stats-column {
+  border-top-color: #2B4499;
+  background: linear-gradient(180deg, #F2F4FB 0%, #ffffff 60px);
+}
+.stats-column h3 {
+  color: #2B4499;
+  border-bottom: 1px solid rgba(43, 68, 153, 0.2);
   padding-bottom: 8px;
   margin-bottom: 12px;
 }

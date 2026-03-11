@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+/* ── Stats sections ───────────────────────────────────────────── */
+
+.stats-section {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--paper-mid, #F0EADA);
+}
+
+.stats-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* ── Summary (totals) rows ────────────────────────────────────── */
+
+.summary-row {
+  margin-top: 2px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(43, 68, 153, 0.15);
+  border-bottom: none !important;
+}
+
+.summary-label {
+  font-weight: 700;
+  color: var(--ink-500, #3E3E2E);
+}
+
+.summary-value {
+  color: #2B4499;
+  font-weight: 700;
+}
+
+/* ── Debt value colors ────────────────────────────────────────── */
+
+.debt-value {
+  color: #A52020;
+}
+
+.debt-summary-value {
+  color: #7B0F0F;
+  font-weight: 700;
+}

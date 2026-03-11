@@ -28,6 +28,6 @@ Version has the following issues I want to improve on next version:
 2. Display "total sandbox debt" at the top.  Need to figure out how to calculate this.
 3. If reserve buys then sells T-Bills, they end up with a lot more cash than when they started.
 
-## v3
+## angular-app - March 2026
 
 TODO

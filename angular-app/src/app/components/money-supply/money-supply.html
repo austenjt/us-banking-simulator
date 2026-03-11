@@ -1,0 +1,45 @@
+<h3>Money Supply & Debt</h3>
+
+<div class="stats-section">
+  <span class="section-label">Money Supply</span>
+  <div class="data-row">
+    <span class="label">Currency in Circulation</span>
+    <span class="value">${{ sim.currencyInCirculation() }}</span>
+  </div>
+  <div class="data-row">
+    <span class="label">Bank Deposits</span>
+    <span class="value">${{ sim.m1() - sim.currencyInCirculation() }}</span>
+  </div>
+  <div class="data-row summary-row">
+    <span class="label summary-label">M1 (Deposits + Cash)</span>
+    <span class="value summary-value">${{ sim.m1() }}</span>
+  </div>
+</div>
+
+<div class="stats-section">
+  <span class="section-label">Reserve System</span>
+  <div class="data-row">
+    <span class="label">System Reserves (at Fed)</span>
+    <span class="value">${{ sim.fedReserveBalances() }}</span>
+  </div>
+  <div class="data-row summary-row">
+    <span class="label summary-label">Monetary Base (M0)</span>
+    <span class="value summary-value">${{ sim.monetaryBase() }}</span>
+  </div>
+</div>
+
+<div class="stats-section">
+  <span class="section-label">Debt</span>
+  <div class="data-row">
+    <span class="label">National Debt (T-Bills)</span>
+    <span class="value debt-value">${{ sim.nationalDebt() }}</span>
+  </div>
+  <div class="data-row">
+    <span class="label">Private Debt (Loans)</span>
+    <span class="value debt-value">${{ sim.totalPrivateDebt() }}</span>
+  </div>
+  <div class="data-row summary-row">
+    <span class="label summary-label">Total System Debt</span>
+    <span class="value debt-summary-value">${{ sim.nationalDebt() + sim.totalPrivateDebt() }}</span>
+  </div>
+</div>

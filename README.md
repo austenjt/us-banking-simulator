@@ -4,7 +4,8 @@ A simulation of US Banking system.  Inspired by Lyn Alden's book Broken Money ch
 
 # Info
 
-TODO
+![App Screenshot](app.png)
+
 ## Temporary site url
 
 https://kind-beach-06ba7921e.2.azurestaticapps.net/
